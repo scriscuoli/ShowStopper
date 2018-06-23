@@ -12,7 +12,7 @@ in the list. The things you are tracking are listed in the entries form and each
 is assigned a button. In this way, during the live performance, all you have to do
 is push buttons. I've included a screenshow example.
 
-![sample screenshot]screenshot1.png
+![sample screenshot]https://github.com/scriscuoli/ShowStopper/blob/master/ShowStopper/screenshot1.png
 
 NOTE: When defining "colors" of things to track, if you add an asterisk to the end
 of the name (for example, you will see that it is TOPIC* not TOPIC when you open
