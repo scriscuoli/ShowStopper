@@ -19,6 +19,7 @@ namespace ShowStopper
         private int second;
         private Settings settings;
         private string saveFileName;
+        private bool needToSave;
         
 
         public Form1()
@@ -36,6 +37,7 @@ namespace ShowStopper
             this.minute = 0;
             this.second = 0;
             this.saveFileName = "";
+            this.needToSave = false;
         }
 
         public string getTime()
@@ -97,10 +99,36 @@ namespace ShowStopper
             dataGridView1.Rows.Clear();
         }
 
+        private bool okToExit()
+        {
+            bool rtn = true;
+            if (this.needToSave == true)
+            {
+                AreYouSure ays = new AreYouSure();
+                DialogResult result = ays.ShowDialog();
+                switch (result)
+                {
+                    case DialogResult.Yes:
+                        // save first ...
+                        saveBtn_Click(null,null);
+                        break;
+                    case DialogResult.No:
+                        break;
+                    case DialogResult.Cancel:
+                        rtn = false;
+                        break;
+                }
+            }
+            return rtn;
+        }
+
         private void quitBtn_Click(object sender, EventArgs e)
         {
-            this.Close();
-            Application.Exit();
+            if (this.okToExit())
+            {
+                this.Close();
+                Application.Exit();
+            }
         }
 
         private void clearButtons()
@@ -180,6 +208,7 @@ namespace ShowStopper
             string label = btn.Text;
             Settings.ButtonSpec bs = this.settings.getButtonSpec(label);
             this.addRow(bs);
+            this.needToSave = true;
         }
 
         private int hms_to_seconds(string hms)
@@ -268,6 +297,7 @@ namespace ShowStopper
                 }
                 File.WriteAllLines(sfd.FileName, ls.ToArray());
             }
+            this.needToSave = false;
         }
 
         private void colorsBtn_Click(object sender, EventArgs e)
@@ -284,6 +314,11 @@ namespace ShowStopper
             EntryForm ef = new EntryForm();
             DialogResult result = ef.ShowDialog();
             this.loadButtons();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = !this.okToExit();
         }
     }
 }

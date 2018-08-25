@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.entriesBtn = new System.Windows.Forms.Button();
             this.colorsBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
             this.quitBtn = new System.Windows.Forms.Button();
@@ -48,7 +49,6 @@
             this.message = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serviceController1 = new System.ServiceProcess.ServiceController();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.entriesBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -108,6 +108,16 @@
             this.splitContainer2.Size = new System.Drawing.Size(217, 507);
             this.splitContainer2.SplitterDistance = 101;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // entriesBtn
+            // 
+            this.entriesBtn.Location = new System.Drawing.Point(104, 37);
+            this.entriesBtn.Name = "entriesBtn";
+            this.entriesBtn.Size = new System.Drawing.Size(52, 28);
+            this.entriesBtn.TabIndex = 6;
+            this.entriesBtn.Text = "Entries";
+            this.entriesBtn.UseVisualStyleBackColor = true;
+            this.entriesBtn.Click += new System.EventHandler(this.entriesBtn_Click);
             // 
             // colorsBtn
             // 
@@ -271,16 +281,6 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // entriesBtn
-            // 
-            this.entriesBtn.Location = new System.Drawing.Point(104, 37);
-            this.entriesBtn.Name = "entriesBtn";
-            this.entriesBtn.Size = new System.Drawing.Size(52, 28);
-            this.entriesBtn.TabIndex = 6;
-            this.entriesBtn.Text = "Entries";
-            this.entriesBtn.UseVisualStyleBackColor = true;
-            this.entriesBtn.Click += new System.EventHandler(this.entriesBtn_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -289,6 +289,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Show Stopper";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
