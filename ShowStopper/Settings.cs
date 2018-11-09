@@ -132,21 +132,24 @@ namespace ShowStopper
         {
             this.clearColors();
             this.clearButtons();
-            string[] lines = File.ReadAllLines(this.SettingsFilePath);
-            foreach(string line in lines)
+            if (File.Exists(this.SettingsFilePath))
             {
-                string[] sa = line.Split('|');
-                if(sa[0] == "button")
+                string[] lines = File.ReadAllLines(this.SettingsFilePath);
+                foreach (string line in lines)
                 {
-                    // button|buttonLabel|buttonType|buttonMessage
-                    ButtonSpec bs = new ButtonSpec(sa[1], sa[2], sa[3]);
-                    this.addButton(bs);
-                }
-                else if(sa[0] == "color")
-                {
-                    // color|buttonType|bg|fg|tracked
-                    ColorSet cs = new ColorSet(sa[1], sa[2], sa[3],sa[4]);
-                    this.addColor(cs);
+                    string[] sa = line.Split('|');
+                    if (sa[0] == "button")
+                    {
+                        // button|buttonLabel|buttonType|buttonMessage
+                        ButtonSpec bs = new ButtonSpec(sa[1], sa[2], sa[3]);
+                        this.addButton(bs);
+                    }
+                    else if (sa[0] == "color")
+                    {
+                        // color|buttonType|bg|fg|tracked
+                        ColorSet cs = new ColorSet(sa[1], sa[2], sa[3], sa[4]);
+                        this.addColor(cs);
+                    }
                 }
             }
         }
