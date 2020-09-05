@@ -11,7 +11,9 @@ namespace ShowStopper
     {
         public string RootDir { get; private set; }
         public string SettingsFilePath { get; private set; }
+        public string CreditsFilePath { get; private set; }
         public string Message { get; private set; }
+        public string[] Credits { get; private set; }
 
         public struct ColorSet
         {
@@ -48,6 +50,7 @@ namespace ShowStopper
         {
             this.RootDir = Environment.ExpandEnvironmentVariables("%AppData%\\ShowStopper");
             this.SettingsFilePath = Path.Combine(this.RootDir, "settings.txt");
+            this.CreditsFilePath = Path.Combine(this.RootDir, "credits.txt");
             this.Message = "";
             this.colors = new Dictionary<string, ColorSet>();
             this.buttons = new Dictionary<string, ButtonSpec>();
@@ -151,6 +154,10 @@ namespace ShowStopper
                         this.addColor(cs);
                     }
                 }
+            }
+            if(File.Exists(this.CreditsFilePath))
+            {
+                this.Credits = File.ReadAllLines(this.CreditsFilePath);
             }
         }
         public void save()

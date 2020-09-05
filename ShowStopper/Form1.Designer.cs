@@ -49,6 +49,7 @@
             this.message = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serviceController1 = new System.ServiceProcess.ServiceController();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.exportBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -93,6 +94,7 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.splitContainer2.Panel1.Controls.Add(this.exportBtn);
             this.splitContainer2.Panel1.Controls.Add(this.entriesBtn);
             this.splitContainer2.Panel1.Controls.Add(this.colorsBtn);
             this.splitContainer2.Panel1.Controls.Add(this.saveBtn);
@@ -106,12 +108,12 @@
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.splitContainer2.Panel2.Controls.Add(this.buttonFlp);
             this.splitContainer2.Size = new System.Drawing.Size(217, 507);
-            this.splitContainer2.SplitterDistance = 101;
+            this.splitContainer2.SplitterDistance = 112;
             this.splitContainer2.TabIndex = 0;
             // 
             // entriesBtn
             // 
-            this.entriesBtn.Location = new System.Drawing.Point(104, 37);
+            this.entriesBtn.Location = new System.Drawing.Point(105, 47);
             this.entriesBtn.Name = "entriesBtn";
             this.entriesBtn.Size = new System.Drawing.Size(52, 28);
             this.entriesBtn.TabIndex = 6;
@@ -121,7 +123,7 @@
             // 
             // colorsBtn
             // 
-            this.colorsBtn.Location = new System.Drawing.Point(104, 68);
+            this.colorsBtn.Location = new System.Drawing.Point(104, 81);
             this.colorsBtn.Name = "colorsBtn";
             this.colorsBtn.Size = new System.Drawing.Size(52, 28);
             this.colorsBtn.TabIndex = 5;
@@ -131,7 +133,7 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(162, 37);
+            this.saveBtn.Location = new System.Drawing.Point(163, 47);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(52, 28);
             this.saveBtn.TabIndex = 4;
@@ -141,7 +143,7 @@
             // 
             // quitBtn
             // 
-            this.quitBtn.Location = new System.Drawing.Point(162, 68);
+            this.quitBtn.Location = new System.Drawing.Point(162, 81);
             this.quitBtn.Name = "quitBtn";
             this.quitBtn.Size = new System.Drawing.Size(52, 28);
             this.quitBtn.TabIndex = 3;
@@ -151,7 +153,7 @@
             // 
             // resetBtn
             // 
-            this.resetBtn.Location = new System.Drawing.Point(3, 68);
+            this.resetBtn.Location = new System.Drawing.Point(3, 81);
             this.resetBtn.Name = "resetBtn";
             this.resetBtn.Size = new System.Drawing.Size(52, 28);
             this.resetBtn.TabIndex = 2;
@@ -161,7 +163,7 @@
             // 
             // stopBtn
             // 
-            this.stopBtn.Location = new System.Drawing.Point(3, 37);
+            this.stopBtn.Location = new System.Drawing.Point(3, 47);
             this.stopBtn.Name = "stopBtn";
             this.stopBtn.Size = new System.Drawing.Size(52, 28);
             this.stopBtn.TabIndex = 1;
@@ -184,7 +186,7 @@
             this.buttonFlp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonFlp.Location = new System.Drawing.Point(0, 0);
             this.buttonFlp.Name = "buttonFlp";
-            this.buttonFlp.Size = new System.Drawing.Size(217, 402);
+            this.buttonFlp.Size = new System.Drawing.Size(217, 391);
             this.buttonFlp.TabIndex = 0;
             // 
             // splitContainer3
@@ -206,7 +208,7 @@
             // 
             this.splitContainer3.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer3.Size = new System.Drawing.Size(663, 507);
-            this.splitContainer3.SplitterDistance = 100;
+            this.splitContainer3.SplitterDistance = 111;
             this.splitContainer3.TabIndex = 0;
             // 
             // stopLbl
@@ -217,7 +219,7 @@
             this.stopLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stopLbl.Location = new System.Drawing.Point(494, 23);
             this.stopLbl.Name = "stopLbl";
-            this.stopLbl.Size = new System.Drawing.Size(148, 39);
+            this.stopLbl.Size = new System.Drawing.Size(148, 50);
             this.stopLbl.TabIndex = 2;
             this.stopLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -229,7 +231,7 @@
             this.startLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startLbl.Location = new System.Drawing.Point(28, 23);
             this.startLbl.Name = "startLbl";
-            this.startLbl.Size = new System.Drawing.Size(148, 39);
+            this.startLbl.Size = new System.Drawing.Size(148, 50);
             this.startLbl.TabIndex = 1;
             this.startLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -240,7 +242,7 @@
             this.displayLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.displayLbl.Location = new System.Drawing.Point(203, 23);
             this.displayLbl.Name = "displayLbl";
-            this.displayLbl.Size = new System.Drawing.Size(253, 39);
+            this.displayLbl.Size = new System.Drawing.Size(253, 50);
             this.displayLbl.TabIndex = 0;
             this.displayLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -254,7 +256,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(663, 403);
+            this.dataGridView1.Size = new System.Drawing.Size(663, 392);
             this.dataGridView1.TabIndex = 0;
             // 
             // time
@@ -280,6 +282,16 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // exportBtn
+            // 
+            this.exportBtn.Location = new System.Drawing.Point(162, 3);
+            this.exportBtn.Name = "exportBtn";
+            this.exportBtn.Size = new System.Drawing.Size(52, 28);
+            this.exportBtn.TabIndex = 7;
+            this.exportBtn.Text = "Export";
+            this.exportBtn.UseVisualStyleBackColor = true;
+            this.exportBtn.Click += new System.EventHandler(this.exportBtn_Click);
             // 
             // Form1
             // 
@@ -329,6 +341,7 @@
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Button colorsBtn;
         private System.Windows.Forms.Button entriesBtn;
+        private System.Windows.Forms.Button exportBtn;
     }
 }
 

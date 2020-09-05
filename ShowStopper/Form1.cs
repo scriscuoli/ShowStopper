@@ -237,7 +237,68 @@ namespace ShowStopper
 
         }
 
-        private void saveBtn_Click(object sender, EventArgs e)
+        private List<string> gridToList()
+        {
+            List<string> ls = new List<string>();
+            foreach (DataGridViewRow obj in dataGridView1.Rows)
+            {
+                if (!obj.IsNewRow)
+                {
+                    string ts = obj.Cells[0].Value.ToString();
+                    string bty = obj.Cells[1].Value.ToString();
+                    string msg = obj.Cells[2].Value.ToString();
+                    string s = ts + "\t" + bty + "\t" + msg;
+
+                    ls.Add(s);
+                }
+            }
+            return ls;
+        }
+
+        private Dictionary<string,int> gridToDurations()
+        {
+            Dictionary<string, int> durations = new Dictionary<string, int>();
+
+            string prevMsg = "";
+            int prevHMS = 0;
+
+            foreach (DataGridViewRow obj in dataGridView1.Rows)
+            {
+                if (!obj.IsNewRow)
+                {
+                    string ts = obj.Cells[0].Value.ToString();
+                    string bty = obj.Cells[1].Value.ToString();
+                    string msg = obj.Cells[2].Value.ToString();
+
+                    // see if this is a trackble event
+                    Settings.ColorSet cs = this.settings.getColorSet(bty);
+                    if ((cs.tracked == "1") || (bty == "STOP"))
+                    {
+                        int hms = this.hms_to_seconds(ts);
+                        if ((prevMsg != "") && (prevMsg != msg))
+                        {
+                            int dur = hms - prevHMS;
+                            if (!durations.ContainsKey(prevMsg))
+                            {
+                                durations.Add(prevMsg, 0);
+                            }
+                            durations[prevMsg] += dur;
+                            prevHMS = hms;
+                            prevMsg = msg;
+                        }
+                        else if (prevMsg == "")
+                        {
+                            prevHMS = hms;
+                            prevMsg = msg;
+                        }
+                    }
+                }
+            }
+
+            return durations;
+        }
+
+        private void old_saveBtn_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Text File|*.txt";
@@ -300,6 +361,31 @@ namespace ShowStopper
             this.needToSave = false;
         }
 
+        private void saveBtn_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Text File|*.txt";
+            sfd.Title = "Save the data";
+            sfd.FileName = this.saveFileName + ".txt";
+            DialogResult res = sfd.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                List<string> ls = this.gridToList();
+
+                Dictionary<string, int> durations = this.gridToDurations();
+
+                ls.Add("");
+                ls.Add("Durations");
+                ls.Add("");
+                foreach (KeyValuePair<string, int> entry in durations)
+                {
+                    ls.Add(entry.Key + "\t" + this.seconds_to_hms(entry.Value));
+                }
+                File.WriteAllLines(sfd.FileName, ls.ToArray());
+            }
+            this.needToSave = false;
+        }
+
         private void colorsBtn_Click(object sender, EventArgs e)
         {
             //ColorList cl = new ColorList();
@@ -319,6 +405,14 @@ namespace ShowStopper
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = !this.okToExit();
+        }
+
+        private void exportBtn_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, int> durations = this.gridToDurations();
+            ExportForm ef = new ExportForm();
+            ef.Durations = durations;
+            DialogResult result = ef.ShowDialog();
         }
     }
 }
